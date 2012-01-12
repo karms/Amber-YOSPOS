@@ -1,0 +1,54 @@
+<html>
+<head>
+<script>
+
+  chrome.experimental.webRequest.onBeforeRequest.addListener(
+    function(details) {
+      if (localStorage.getItem('yosposcolor') == 'amber') {
+        console.log("Blocked 219.css, injecting 219a.css");
+        return {redirectUrl: chrome.extension.getURL("219a.css")};
+      }
+      else if (localStorage.getItem('yosposcolor') == 'green') {
+        console.log("Blocked 219.css, injecting new 219.css");
+        return {redirectUrl: chrome.extension.getURL("219.css")};
+      }
+      else {
+        console.log("Blocked 219.css, injecting 219a.css");
+        return {redirectUrl: chrome.extension.getURL("219a.css")};
+      }
+    },
+    {urls: ["http://forums.somethingawful.com/css/219.css*"]},
+    ["blocking"]
+  );
+
+	chrome.extension.onRequest.addListener(function (request, sender) { 
+		if (request == "show_page_action") { 
+			chrome.pageAction.show(sender.tab.id);	
+			colorset(sender.tab.id);
+		}		
+	});
+	
+	chrome.pageAction.onClicked.addListener(function(tab) {
+		if (localStorage.getItem('yosposcolor') == 'amber') {	
+			localStorage.setItem('yosposcolor','green');
+		} else if (localStorage.getItem('yosposcolor') == 'green') {	
+			localStorage.setItem('yosposcolor','amber');
+		} else {
+			localStorage.setItem('yosposcolor','green');
+		}
+		colorset(tab.id);				
+	});
+
+	function colorset(tabID) {
+		chrome.tabs.sendRequest(tabID, "yospos" + localStorage.getItem('yosposcolor'));
+		
+		//chrome.tabs.getSelected(null, function(tab) {
+		//  chrome.tabs.sendRequest(tab.id,"yospos" + localStorage.getItem('yosposcolor'));
+		//});
+		//chrome.tabs.onActiveChanged.addListener(function(tabId,windowID){
+		//  chrome.tabs.sendRequest(tabId,"yospos" + localStorage.getItem('yosposcolor'));
+		//});
+	}
+</script>
+</head>
+</html>

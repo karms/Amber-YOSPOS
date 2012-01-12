@@ -1,0 +1,26 @@
+{
+   "background_page": "background.html",
+   "content_scripts": [ {
+      "all_frames": false,
+      "js": [ "jquery.min.js", "contentscript.js" ],
+      "matches": [ "http://forums.somethingawful.com/*" ],
+      "run_at": "document_end"
+   }, {
+      "js": [ "tablebreak.js" ],
+      "matches": [ "http://forums.somethingawful.com/showthread.php?*", "http://forums.somethingawful.com/newreply.php?*", "http://forums.somethingawful.com/newreply.php" ],
+      "run_at": "document_end"
+   } ],
+   "description": "You are a nerd, I'm afraid it's terminal",
+   "icons": {
+      "128": "yospos-128.png",
+      "48": "yospos-48.png"
+   },
+
+   "name": "YOSPOS Terminal Switcher/Experimental",
+   "page_action": {
+      "default_icon": "yospos-19.png",
+      "default_title": "okay"
+   },
+   "permissions": [ "experimental", "tabs", "http://*.somethingawful.com/*" ],
+   "version": "1.2"
+}
