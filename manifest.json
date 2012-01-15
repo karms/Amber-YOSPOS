@@ -21,6 +21,6 @@
       "default_icon": "yospos-19.png",
       "default_title": "okay"
    },
-   "permissions": [ "experimental", "tabs", "http://*.somethingawful.com/*" ],
+   "permissions": [ "experimental", "webRequest", "tabs", "http://*.somethingawful.com/*" ],
    "version": "1.2"
 }
