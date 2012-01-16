@@ -255,7 +255,7 @@ div.standard {
     color:#000;
 	}
 	50% {
-		background:#000;
+		background:transparent;
     color:#eacf4c;
 	}
 	100% {
